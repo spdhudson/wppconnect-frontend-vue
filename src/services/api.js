@@ -18,7 +18,9 @@ import { io } from "socket.io-client";
 import config from "../config.js";
 
 const ip = config.IP_SERVER;
+const wpp = config.WPP_API;
 
 export const socket = io(config.IP_SOCKET_IO);
 export const api = axios.create({ baseURL: ip });
+export const wppApi = axios.create({ baseURL: wpp });
 export default api;

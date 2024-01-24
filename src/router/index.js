@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import config from "../config.js";
 const Login = () => import("../pages/Login");
+const Qrcode = () => import("../pages/Qrcode.vue");
 const Chat = () => import("../pages/Chat");
 const Contacts = () => import("../pages/Contacts");
 const Groups = () => import("../pages/Groups");
@@ -10,10 +11,15 @@ const Configs_Buttons = () => import("../pages/Configs_Buttons.vue");
 const Configs_Lists = () => import("../pages/Configs_Lists.vue");
 
 const routes = [
+  // {
+  //   // path: "/login",
+  //   name: "login",
+  //   component: Login,
+  // },
   {
-    path: "/login",
-    name: "login",
-    component: Login,
+    path: "/qrcode",
+    name: "qrcode",
+    component: Qrcode,
   },
   {
     path: "/",

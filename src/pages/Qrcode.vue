@@ -15,11 +15,11 @@
                         <div v-if="qrCode && !connected"
                             style="display: flex; flex-direction: column;justify-content: center; align-items: center;">
                             <span>
-                                <img :src="qrCode" style="max-width:350px" class="animation noselect" autoplay alt="Smartphone"
-                                draggable="false" />
+                                <img :src="qrCode" style="max-width:350px" class="animation noselect" autoplay
+                                    alt="Smartphone" draggable="false" />
                             </span>
                             <h1>Escaneie o QrCode com o app do WhatsApp</h1>
-                           
+
                         </div>
                         <div v-if="connected">
                             <h1 id="title">WhatsApp conectado!</h1>
@@ -85,8 +85,8 @@ export default {
     data() {
         return {
             // response: any,
-            connected:false,
-            allowerReload:false,
+            connected: false,
+            allowerReload: false,
             email: '',
             code: '',
             session: '',
@@ -113,10 +113,18 @@ export default {
                     if (response.data.qrcode != null) {
                         this.qrCode = response.data.qrcode
                     }
-                    else if(response.data.status == 'connected'){
-                      this.connected = true
+                    else if (response.data.status == 'connected') {
+                        this.connected = true
                     }
-                    await  this.sleep(5000)
+                    else if (response.data.status == 'ERROR') {
+                        this.qrCode = ''
+                        this.$swal(
+                            'Erro',
+                            response.data.message,
+                            'erro');
+                        return
+                    }
+                    await this.sleep(5000)
                 }
 
                 const config = {
@@ -145,7 +153,7 @@ export default {
             }
         },
         sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms))
+            return new Promise((resolve) => setTimeout(resolve, ms))
         },
         async signSession() {
             const config = {
@@ -322,4 +330,5 @@ form button:hover {
 form button:disabled {
     background: #5b5e78;
     cursor: not-allowed;
-}</style>
+}
+</style>
